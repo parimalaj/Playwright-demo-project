@@ -7,7 +7,7 @@ End-to-end UI test automation for the demo e-commerce site [demoblaze.com](https
 > Personal practice project, built to learn and demonstrate a complete test automation + CI/CD workflow.
 
 ---
-
+s
 ## Tech stack
 
 | Area | Tools |
