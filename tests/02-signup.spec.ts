@@ -10,7 +10,7 @@ test.describe('Signup', () => {
     await signupPage.openSignupPopup();
   });
 
-  test('new user can sign up', async () => {
+  test('new user can sign up', { tag: '@smoke' }, async () => {
     const message = await signupPage.signup(`user_${Date.now()}`, 'Test@123');
     expect(message).toBe('Sign up successful.');
   });

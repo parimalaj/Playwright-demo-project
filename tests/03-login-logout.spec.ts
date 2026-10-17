@@ -10,7 +10,7 @@ test.describe('Login / Logout', () => {
     await loginPage.openLoginPopup();
   });
 
-  test('valid user can log in', async () => {
+  test('valid user can log in', { tag: '@smoke' }, async () => {
     await loginPage.login(process.env.DEMO_USER!, process.env.DEMO_PASS!);
 
     await expect(loginPage.welcomeUser).toHaveText(`Welcome ${process.env.DEMO_USER}`);

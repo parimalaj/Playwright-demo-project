@@ -9,7 +9,7 @@ test.describe('Products', () => {
     await homePage.goto();
   });
 
-  test('home page shows 9 products', async () => {
+  test('home page shows 9 products', { tag: '@smoke' }, async () => {
     await expect(homePage.productCards).toHaveCount(9);
   });
 

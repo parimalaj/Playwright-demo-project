@@ -33,7 +33,7 @@ test.describe('Checkout', () => {
     await expect(cartPage.rows).toHaveCount(1);
   });
 
-  test('user can complete a purchase', async () => {
+  test('user can complete a purchase', { tag: '@smoke' }, async () => {
     const total = await cartPage.getTotal();
 
     await cartPage.openPlaceOrder();
