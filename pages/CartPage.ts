@@ -27,4 +27,9 @@ export class CartPage {
       .getByRole('link', { name: 'Delete' })
       .click();
   }
+
+    async openPlaceOrder() {
+    await this.placeOrderButton.click();
+    await this.page.locator('#orderModal #name').waitFor();
+  }
 }
