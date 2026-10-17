@@ -42,15 +42,15 @@ test.describe('Cart', () => {
     expect(await cartPage.getTotal()).toBe(phonePrice + laptopPrice);
   });
 
-  test('deleting an item removes it from the cart', async ({ page }) => {
+    test('deleting an item removes it from the cart', async ({ page }) => {
     await addProduct(page, 'Samsung galaxy s6');
-    await addProduct(page, 'Apple monitor 24');
+    await addProduct(page, 'Nokia lumia 1520');
 
     const cartPage = new CartPage(page);
     await cartPage.goto();
     await expect(cartPage.rows).toHaveCount(2);
 
-    await cartPage.deleteItem('Apple monitor 24');
+    await cartPage.deleteItem('Nokia lumia 1520');
 
     await expect(cartPage.rows).toHaveCount(1);
     await expect(cartPage.rows.first()).toContainText('Samsung galaxy s6');
