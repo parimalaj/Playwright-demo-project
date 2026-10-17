@@ -1,16 +1,27 @@
 import { test, expect } from '@playwright/test';
-import { acceptDialog } from '../utils/dialog';
+import { SignupPage } from '../pages/SignupPage';
 
-test('cannot sign up with an existing username', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('#signin2').click();
+test.describe('Signup', () => {
+  let signupPage: SignupPage;
 
-  await page.locator('#sign-username').fill(process.env.DEMO_USER!);
-  await page.locator('#sign-password').fill(process.env.DEMO_PASS!);
+  test.beforeEach(async ({ page }) => {
+    signupPage = new SignupPage(page);
+    await signupPage.goto();
+    await signupPage.openSignupPopup();
+  });
 
-  const message = await acceptDialog(page, () =>
-    page.locator('#signInModal').getByRole('button', { name: 'Sign up' }).click()
-  );
+  test('new user can sign up', async () => {
+    const message = await signupPage.signup(`user_${Date.now()}`, 'Test@123');
+    expect(message).toBe('Sign up successful.');
+  });
 
-  expect(message).toBe('This user already exist.');
+  test('cannot sign up with an existing username', async () => {
+    const message = await signupPage.signup(process.env.DEMO_USER!, process.env.DEMO_PASS!);
+    expect(message).toBe('This user already exist.');
+  });
+
+  test('empty fields show validation', async () => {
+    const message = await signupPage.signup('', '');
+    expect(message).toBe('Please fill out Username and Password.');
+  });
 });
