@@ -7,12 +7,19 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   fullyParallel: true,
   retries: 1,
-  reporter: [['list'], ['html', { open: 'never' }]],
+
+  reporter: [
+    ['list'],
+    ['html', { open: 'never' }],
+    ['junit', { outputFile: 'test-results/junit.xml' }],
+  ],
+
   use: {
     baseURL: 'https://www.demoblaze.com',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
+
   projects: [
     {
       name: 'chromium',
