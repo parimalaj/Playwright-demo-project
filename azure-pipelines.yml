@@ -44,3 +44,11 @@ steps:
     inputs:
       targetPath: 'playwright-report'
       artifact: 'playwright-report'
+
+schedules:
+  - cron: '0 9 * * *'
+    displayName: 'Nightly run'
+    branches:
+      include:
+        - main
+    always: true
